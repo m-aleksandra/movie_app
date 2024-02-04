@@ -24,11 +24,8 @@ Make sure you have `npm` installed on your machine.
 
 ```bash
 git clone https://github.com/m-aleksandra/movie_app.git
-
-```
-```bash
+cd movie_app
 npm install
-```
-```bash
 npm run start
 ```
+
