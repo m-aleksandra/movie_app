@@ -25,4 +25,4 @@ Make sure you have `npm` installed on your machine.
 ```bash
 git clone https://github.com/m-aleksandra/movie_app.git
 npm install
-npm run devStart
+npm run start
