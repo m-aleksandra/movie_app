@@ -1,0 +1,112 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card">
+        <div class="row g-0">
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <img src="<%= movie.backdrop_path %>" class="img-fluid rounded-start" alt="movie image" style="width: 100%;">
+            <div class="bg-light p-2 mt-2 rounded-start">
+              Average Vote: <span class="fas fa-star" style="color: #fd4;"></span>
+              <%= movie.vote_average %>
+            </div>
+            <div class="bg-light p-2 mt-2 rounded-start">Vote Count: <%= movie.vote_count %></div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= movie.title %></h5>
+              <p class="card-text"><small class="text-muted"><%= movie.prettyDate %></small></p>
+              <p class="card-text"><%= movie.overview %></p>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container my-5 py-5">
+  <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-8">
+          <div class="card text-dark">
+              <div class="card-body p-4">
+                  <% if (user) { %>
+                    <h4 class="text-center">Rate this movie</h4>
+                    <form action="/<%= movie.id %>/submit-comment" method="POST">
+                      <div class="star-widget mb-2">
+                        <input type="radio" name="rate" id="rate-10" value=10>
+                        <label for="rate-10" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-9" value=9>
+                        <label for="rate-9" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-8" value=8>
+                        <label for="rate-8" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-7" value=7>
+                        <label for="rate-7" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-6" value=6>
+                        <label for="rate-6" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-5" value=5>
+                        <label for="rate-5" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-4" value=4>
+                        <label for="rate-4" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-3" value=3>
+                        <label for="rate-3" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-2" value=2>
+                        <label for="rate-2" class="fas fa-star"></label>
+                        <input type="radio" name="rate" id="rate-1" value=1>
+                        <label for="rate-1" class="fas fa-star"></label>
+                      </div>
+                      <div class="form-outline w-100">
+                        <textarea class="form-control" id="textAreaExample" rows="4"
+                        name="comment" style="background: #fff;"></textarea>
+                      </div>
+                      <div class="d-flex justify-content-end mt-2">
+                        <button type="submit" class="btn btn-primary btn-sm">Post review</button>
+                      </div>
+                    </form>
+                  <% } else { %>
+                    <h4 class="text-center"><a href="/login">Log in</a> to rate this movie</h4>
+                  <% } %>
+
+          <% comments.forEach(comment => { %>
+              <hr class="my-4" />
+                <div class="d-flex flex-start">
+                  <img class="rounded-circle shadow-1-strong me-3"
+                    src="<%= comment.profile %>" alt="avatar" 
+                    width="60" height="60" />
+                  <div>
+                    <h6 class="fw-bold mb-1"><%= comment.username %></h6>
+                    <div class="d-flex align-items-center mb-3">
+                      <p class="mb-0 me-1"><%= comment.prettyDate %></p>
+                      <% if (user && comment.user._id.toString() === user._id.toString()) { %>
+                        <form action="/<%= movie.id %>/delete-comment/<%= comment._id %>?_method=DELETE" method="POST">
+                          <button type="submit" class="delete-comment" style="background: none; border: none; cursor: pointer;">
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+                        </form>
+                      <% } %>
+                    </div>
+                    <div>
+                        <% for(let i = 1; i <= comment.rating; i++) { %>
+                          <span class="fas fa-star" style="color: #fd4;"></span> <!-- Filled star -->
+                        <% } %>
+                        <% for(let i = comment.rating + 1; i <= 10; i++) { %>
+                          <span class="far fa-star" style="color: #ccc;"></span> <!-- Empty star -->
+                        <% } %>
+                      </div>
+                    <p class="mb-0"><%= comment.text %></p>
+                  </div>
+                </div>
+          <% }); %>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script src="/scripts/search.js"></script>
+</body>
+</html>

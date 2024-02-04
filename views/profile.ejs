@@ -1,0 +1,35 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+
+<div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-lg-6">
+            <div class="card text-dark">
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <img src="<%= user.profile %>" alt="profile" 
+                        class="img-fluid shadow-1-strong mb-3 mx-auto d-block" 
+                        style="width: 150px; height: 150px; border-radius: 50%;">
+                    </div>
+                    <form action="/update?_method=PATCH" method="POST">
+                        <div class="mb-3">
+                            <label for="imagePath" class="form-label">Change Image Path</label>
+                            <input type="text" class="form-control" id="imagePath" name="imagePath" value="<%= user.profile %>" 
+                            placeholder="Enter new image URL">
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Change Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="<%= user.username %>" 
+                            placeholder="Enter new username">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/search.js"></script>
+</body>
+</html>

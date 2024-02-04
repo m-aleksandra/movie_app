@@ -1,0 +1,27 @@
+.star-widget {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  margin: 1rem;
+}
+.star-widget input {
+  display: none;
+}
+.star-widget label {
+  color: #444;
+  font-size: 25px;
+  padding: 3px;
+  transition: all 0.2s ease;
+}
+.star-widget input:not(:checked)~label:hover,
+.star-widget input:not(:checked)~label:hover~label
+{
+  color: #fd4;
+}
+.star-widget input:checked ~ label {
+  color: #fd4;
+}
+.star-widget input#rate-10:checked ~ label {
+  color: #fd4;
+  text-shadow: 0 0 10px #952;
+}

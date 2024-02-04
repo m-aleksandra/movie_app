@@ -1,0 +1,36 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <% movies.forEach((movie) => { %>
+      <div class="col-md-8 col-lg-6 mb-3"> 
+        <div class="card" style="background-color: #7b7b7baa; border: solid white 1px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="<%= movie.poster_path %>" class="img-fluid rounded-start" alt="movie image" style="width: 100%;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body text-white"> 
+                <h5 class="card-title"><%= movie.title %></h5>
+                <p class="card-text">
+                  <span id="description_<%= movie.id %>"><%= movie.shortOverview %></span>
+                  <a href="/movie/<%= movie.id %>" class="btn btn-link text-white">Read More</a> 
+                </p>
+                <p class="card-text">Vote count: <%= movie.vote_count %></p>
+                <p class="card-text">Vote average: <%= movie.vote_average %>
+                <span class="fas fa-star" style="color: #fd4;"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+
+<script src="/scripts/search.js"></script>
+</body>
+</html>
